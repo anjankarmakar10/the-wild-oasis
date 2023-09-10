@@ -1,5 +1,7 @@
 import styled from "styled-components";
-
+import { HiXMark } from "react-icons/hi2";
+import { createPortal } from "react-dom";
+import useKey from "../hooks/useKey";
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
@@ -48,3 +50,26 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+const ButtonClose = styled(Button)`
+  margin-top: -4px;
+  margin-right: -4px;
+`;
+
+const Modal = ({ children, onClose }) => {
+  useKey("Escape", onClose);
+
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <ButtonClose onClick={onClose}>
+          <HiXMark />
+        </ButtonClose>
+        {children}
+      </StyledModal>
+      ;
+    </Overlay>,
+    document.body
+  );
+};
+export default Modal;
