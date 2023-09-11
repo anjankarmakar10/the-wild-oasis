@@ -88,7 +88,7 @@ const Window = ({ children, name }) => {
   if (openName !== name) return null;
 
   return createPortal(
-    <Overlay>
+    <Overlay onClick={close}>
       <StyledModal>
         <ButtonClose onClick={close}>
           <HiXMark />
